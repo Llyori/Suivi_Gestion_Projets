@@ -1,0 +1,118 @@
+{% extends "layouts/dashboard.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Etat D'Avancement.</h3>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+    
+</div><!-- .nk-block-head -->
+{% endblock %}
+
+
+{% block content %}
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <!-- <div class="nk-block-head">
+                    <div class="nk-block-between g-3">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Thème du Projet: <strong class="text-primary big">{{projet.nomProjet}}</strong></h3><br>
+                            <h3 class="nk-block-title page-title">Libelle: <strong class="text-primary big">{{projet.libelle}}</strong></h3><br>
+                            <h2 class="nk-block-title page-title">Date Butoir: <strong class="text-primary big">{{projet.dateFinProjet}}</strong></h2>
+                            <div class="nk-block-des text-soft">
+                                <ul class="list-inline">
+                                    <li>Created At: <span class="text-base">18 Dec, 2019 01:02 PM</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="nk-block">
+                    <div class="invoice">
+                        <div class="invoice-action">
+                            <a class="btn btn-icon btn-lg btn-white btn-dim btn-outline-primary" href="/dash/printTask/{{projet.idProjet}}" target="_blank"><em class="icon ni ni-printer-fill"></em></a>
+                        </div><!-- .invoice-actions -->
+                        <div class="invoice-wrap">
+                            <div class="invoice-brand text-center">
+                                <h3 class="nk-block-title page-title">Tâche:  <strong class="text-primary big">{{task.nomTache}}</strong></h3><br>
+                            </div>
+                            <div class="invoice-head">
+                                <div class="invoice-desc">
+                                    <h5 class="title">Rapport</h5>
+                                </div>
+                                <div class="invoice-contact">
+                                    <span class="overline-title">Realisé par</span>
+                                    <div class="invoice-contact-info">
+                                        <h4 class="title">Mr {{task.id.name}}</h4>
+                                        <!-- <ul class="list-plain">
+                                            <li><em class="icon ni ni-map-pin-fill"></em><span>House #65, 4328 Marion Street<br>Newbury, VT 05051</span></li>
+                                            <li><em class="icon ni ni-call-fill"></em><span>+012 8764 556</span></li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+                            </div><!-- .invoice-head -->
+                            <div class="nk-block nk-block-lg">
+                                <div class="card card-bordered card-preview">
+                                    <table class="table table-orders">
+                                        <thead class="tb-odr-head">
+                                            <tr>
+                                                <th  class="w-10">Date Exécution</th>
+                                                <th class="w-30">Activités faites</th>
+                                                <th class="w-15">Besoins</th>
+                                                <th  class="w-15">Difficultés</th>
+                                                <th>Pièces Jointes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tb-odr-body">
+                                            {% for task in DetailTache %}
+                                            {% if task.statut in 'En Cours' %}
+                                            <tr>
+                                                <td>{{task.date}}</td>
+                                                <td>{{task.travailFait}}</td>
+                                                <td>{{task.besoin}}</td>
+                                                <td>{{task.difficulte}}</td>
+                                                <td>&nbsp &nbsp &nbsp &nbsp &nbsp   
+                                                    <a href="#">
+                                                        <i class="bi bi-download">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                            </svg>
+                                                        </i>
+                                                    </a>
+                                                </td>
+                                                    
+                                                    <td>
+                                                        <div class="tb-odr-btns d-none d-md-inline">
+                                                            <a href="/dash/updateonedetail/add/{{task.idTacheDetail}}/termine/{{user.uuid}}" class="btn btn-sm btn-success {{ 'disabled' if task.statut in 'termine' }} ">Valider</a><br><br>
+                                                            <a href="/dash/rejeterEtat/{{task.idTacheDetail}}/{{user.uuid}}/false" class="btn btn-sm btn-danger">Rejetter</a>
+                                                        </div>
+                                                    </td>
+
+                                                        <!-- <td><p class="badge bg-warning">Soumis</p>
+                                                        </td> -->
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- .card-preview -->
+                            </div><!-- nk-block -->
+                        </div><!-- .invoice-wrap -->
+                    </div><!-- .invoice -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>                     
+{% endblock %}

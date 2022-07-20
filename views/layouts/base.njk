@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="./images/logo.png">
+    <!-- Page Title  -->
+    <title>
+      {% if pageTitle %}{{ pageTitle }}
+      {% else %}OnTime{% endif %}
+    </title>
+    <!-- StyleSheets  -->
+    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="/assets/css/dashlite.css?ver=2.9.1">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=2.9.1">
+</head>
+
+<body class="nk-body bg-light has-sidebar has-touch nk-nio-theme {{ 'dark-mode' if user.dark_mode == true }}">
+
+    <!-- main @s -->
+    <div class="nk-app-root">
+    <div class="nk-main ">
+      {% block body %}{% endblock %}
+    </div>
+    <div>
+    <!-- end main @s -->
+    {% block javascripts %}
+    {% endblock %}
+       <!-- JavaScript -->    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/assets/js/bundle.js?ver=2.9.1"></script>
+    <script src="/assets/js/scripts.js?ver=2.9.1"></script>
+    <script src="/assets/js/charts/gd-default.js?ver=2.9.1"></script>
+    <script src="/assets/js/charts/chart-ecommerce.js?ver=2.9.1"></script>
+    <script src="/assets/js/libs/datatable-btns.js?ver=2.9.1"></script>
+    <script src="/assets/js/appscript.js"></script>
+    <script src="/assets/js/transaction-scripts.js"></script>
+    <script src="./assets/js/charts/chart-hotel.js?ver=2.9.1"></script>
+    <script src="/assets/js/libs/jqvmap.js?ver=2.9.1"></script>
+
+</body>
+
+</html>

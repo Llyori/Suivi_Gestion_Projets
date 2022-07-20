@@ -1,0 +1,208 @@
+{% extends "layouts/dashboad.njk" %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Tableau de bord</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Bienvenu Monsieur {{user.name}}.</p>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        <div class="col-md-4">
+                            <div class="card card-bordered card-full">
+                                <div class="card-inner">
+                                    <div class="card-title-group align-start mb-0">
+                                        <div class="card-title">
+                                            <h6 class="title">Total Utilisateur</h6>
+                                        </div>
+                                        <div class="card-tools">
+                                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Total Utilisateur"></em>
+                                        </div>
+                                    </div>
+                                    <div class="card-amount">
+                                        <span class="amount"> {{ personnel }} </span>
+                                    </div>
+                                    <div class="invest-data">
+                                        <div class="invest-data-amount g-2">
+                                            <div class="invest-data-history">
+                                                <div class="title">personnel</div>
+                                                <div class="amount">{{personnel - personnelAd}}</div>
+                                            </div>
+                                            <div class="invest-data-history">
+                                                <div class="title">Administrateur</div>
+                                                <div class="amount">{{personnelAd}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="invest-data-ck">
+                                            <canvas class="iv-data-chart" id="totalBooking"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        <div class="col-md-4">
+                            <div class="card card-bordered card-full">
+                                <div class="card-inner">
+                                    <div class="card-title-group align-start mb-0">
+                                        <div class="card-title">
+                                            <h6 class="title">Total Equipe</h6>
+                                        </div>
+                                        <div class="card-tools">
+                                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Equipe"></em>
+                                        </div>
+                                    </div>
+                                    <div class="card-amount">
+                                        <span class="amount"> {{Equipes}} </span>
+                                    </div>
+                                    <div class="invest-data">
+                                        <div class="invest-data-amount g-2">
+                                            <div class="invest-data-history">
+                                                <div class="title">Actif</div>
+                                                <div class="amount">{{t[0]}}</div>
+                                            </div>
+                                            <div class="invest-data-history">
+                                                <div class="title">Inactif</div>
+                                                <div class="amount">{{t[1]}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="invest-data-ck">
+                                            <canvas class="iv-data-chart" id="totalRoom"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        <div class="col-md-4">
+                            <div class="card card-bordered  card-full">
+                                <div class="card-inner">
+                                    <div class="card-title-group align-start mb-0">
+                                        <div class="card-title">
+                                            <h6 class="title">Etat Avancement</h6>
+                                        </div>
+                                        <div class="card-tools">
+                                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Total Expenses"></em>
+                                        </div>
+                                    </div>
+                                    <div class="card-amount">
+                                        <span class="amount"> {{tdr[0] + tdr[1]}} <span class="currency currency-usd"></span>
+                                        </span>
+                                    </div>
+                                    <div class="invest-data">
+                                        <div class="invest-data-amount g-2">
+                                            <div class="invest-data-history">
+                                                <div class="title">En cours</div>
+                                                <div class="amount">{{tdr[0]}}<span class="currency currency-usd"></span></div>
+                                            </div>
+                                            <div class="invest-data-history">
+                                                <div class="title">Terminé</div>
+                                                <div class="amount">{{tdr[1]}}<span class="currency currency-usd"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="invest-data-ck">
+                                            <canvas class="iv-data-chart" id="totalExpenses"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        
+                        <div class="col-md-6 col-xxl-8">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="card-title-group align-start pb-3 g-2">
+                                        <div class="card-title">
+                                            <h6 class="title">Projets</h6>
+                                        </div>
+                                        <div class="card-tools">
+                                            <em class="card-hint icon ni ni-help" data-toggle="tooltip" data-placement="left" title="Revenue of this month"></em>
+                                        </div>
+                                    </div>
+                                    <div class="card-amount">
+                                        <span class="amount"> {{projects}} </span>
+                                    </div><br>
+                                    <div class="analytic-au">
+                                        <div class="invest-data-amount g-2">
+                                            <div class="analytic-data analytic-au-data">
+                                                <div class="title">En Attente</div>
+                                                <div class="amount">{{ pj[0] }}</div>
+                                            </div>
+                                            <div class="analytic-data analytic-au-data">
+                                                <div class="title">Soumis</div>
+                                                <div class="amount">{{ pj[1] }}</div>
+                                            </div>
+                                            <div class="analytic-data analytic-au-data">
+                                                <div class="title">En Cours</div>
+                                                <div class="amount">{{ pj[2] }}</div>
+                                            </div>
+                                            <div class="analytic-data analytic-au-data">
+                                                <div class="title">Terminé</div>
+                                                <div class="amount">{{ pj[3] }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="analytic-au-ck">
+                                            <canvas class="analytics-au-chart" id="analyticAuData"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        <div class="col-md-6 col-xxl-4">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="card-title-group">
+                                        <div class="card-title">
+                                            <h6 class="title"><span class="mr-2">Utilisateurs Récemment Ajoutés</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner p-0 border-top">
+                                    <div class="nk-tb-list nk-tb-orders">
+                                        <div class="nk-tb-item nk-tb-head">
+                                            <div class="nk-tb-col tb-col-sm"><span>Nom</span></div>
+                                            <div class="nk-tb-col tb-col-md"><span>Telephone</span></div>
+                                            <div class="nk-tb-col tb-col-md"><span>Statut</span></div>
+                                        </div>
+                                        {% for pers in i %}
+                                        <div class="nk-tb-item">
+                                            <div class="nk-tb-col tb-col-sm">
+                                                <div class="user-card">
+                                                    <div class="user-name">
+                                                        <span class="tb-lead">{{pers.name}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                <span class="tb-sub tb-amount">{{pers.telephone}}</span>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                {% if pers.status == 'Inactif' %}
+                                                <span class="badge badge-dot badge-dot-xs badge-warning">{{pers.status}}</span>
+                                                {% else %}
+                                                <span class="badge badge-dot badge-dot-xs badge-success">{{pers.status}}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="card-inner-sm border-top text-center d-sm-none">
+                                    <a href="#" class="btn btn-link btn-block">See History</a>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

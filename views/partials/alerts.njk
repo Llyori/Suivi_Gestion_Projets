@@ -1,0 +1,6 @@
+{% for alert in _alerts %}
+<div class="alert alert-fill alert-icon alert-{{ alert.type }}" role="alert">
+    <em class="icon ni ni-alert-circle"></em> 
+    <strong>{{ alert.type }}</strong>.{{ alert.message }} 
+</div>
+{% endfor %}

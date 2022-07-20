@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <!-- Page Title  -->
+    <title>Invoice Print | DashLite Admin Template</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="/assets/css/dashlite.css?ver=2.9.1">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=2.9.1">
+</head>
+
+<body class="bg-white" onload="printPromot()">
+    
+    <div class="nk-block">
+        <div class="invoice invoice-print">
+            <div class="invoice-wrap">
+                <div class="brand-logo pb-4 text-center">
+                    <img src="./images/logo.png" srcset="./images/logo.png" width="245px" height="" alt="logo">
+                </div>
+                <div class="invoice-brand text-center">
+                    <h3 class="nk-block-title page-title"><strong class="text-primary big">{{task.nomTache}}</strong></h3><br>
+                </div>
+                <div class="invoice-head">
+                    <div class="invoice-desc">
+                        <h5 class="title">Etat Avancement</h5>
+                    </div>
+                    <div class="invoice-contact">
+                        <span class="overline-title">Realisé par</span>
+                        <div class="invoice-contact-info">
+                            <h4 class="title">Mr {{task.id.name}}</h4>
+                            <!-- <ul class="list-plain">
+                                <li><em class="icon ni ni-map-pin-fill"></em><span>House #65, 4328 Marion Street<br>Newbury, VT 05051</span></li>
+                                <li><em class="icon ni ni-call-fill"></em><span>+012 8764 556</span></li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div><!-- .invoice-head -->
+                <div class="invoice-bills">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date Exécution</th>
+                                    <th class="w-30">Activités faites</th>
+                                    <th class="w-30">Besoins</th>
+                                    <th>Difficultés</th>
+                                    <th>Piece Jointe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in DetailTache %}
+                                {% if task.statut in 'termine' %}
+                                <tr>
+                                    <td>{{task.date}}</td>
+                                    <td>{{task.travailFait}}</td>
+                                    <td>{{task.besoin}}</td>
+                                    <td>{{task.difficulte}}</td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="bi bi-download">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                </svg>
+                                            </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="nk-notes ff-italic fs-12px text-soft"> Etat d'avancement de la tache <strong>{{task.nomTache}}</strong>. </div>
+                    </div>
+                </div><!-- .invoice-bills -->
+            </div><!-- .invoice-wrap -->
+        </div><!-- .invoice -->
+    </div><!-- .nk-block -->
+    <script>
+        function printPromot() {
+            window.print();
+        }
+    </script>
+</body>
+
+</html>

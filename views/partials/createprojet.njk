@@ -1,0 +1,63 @@
+<div class="modal fade" role="dialog" id="addTax">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                   <form  id="form4" method="Post" data-page="/dash/pro/{{user.uuid}}" action="/dash/pro" class="form-validate">
+                    {{ form.csrf_field(csrf) }}
+                    <h5 class="title">Ajouter Un Projet</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#infomation">Nouveau Projet</a>
+                        </li>
+                    </ul><!-- .nav-tabs -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="fv-subject">Date Butoire</label>
+                                        <div class="form-control-wrap">
+                                            <input type="date" class="form-control" id="fv-dh" name="dateFinProjet">
+                                            <input type="number" class="form-control" hidden id="fv-dh" value="{{user.id}}" name="idAdmin">
+                                            <input type="text" class="form-control" hidden  id="fv-dh" value="{{user.uuid}}" name="uuid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                       {{ form.text_field(_e ,_o ,name="nomClient", label="Nom Client") }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                       {{ form.text_field(_e ,_o ,name="nomProjet", label="Thème Projet") }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                       {{ form.text_field(_e ,_o ,name="libelle", label="Libelle") }}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li>
+                                                    <button type="submit" id="form4_button" class="btn btn-primary">
+                                                            <span style="display: none" id="form4_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                            <span id="form4_submit" >Enregistrer</span>
+                                                        </button> 
+                                             </li>
+                                    </ul>
+                                            
+                                </div>
+                            </div>
+                        </div><!-- .tab-pane -->
+                    </div><!-- .tab-content -->
+                </form>
+                </div><!-- .modal-body -->
+
+            </div><!-- .modal-content -->
+        </div><!-- .modal-dialog -->
+    </div><!-- .modal -->
+    {# new agency modal end #}

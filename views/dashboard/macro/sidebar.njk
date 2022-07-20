@@ -1,0 +1,45 @@
+{% import "dashboard/macro/helpers.njk" as helpers %}
+{% macro side_bar_menu(menu_id, sidebarMenu, inst ) %}
+
+     <!-- sidebar @s -->
+     
+            <div class="nk-sidebar nk-sidebar-fixed is-dark is-compact" data-content="sidebarMenu">
+                <div class="nk-sidebar-element nk-sidebar-head">
+                    <div class="nk-menu-trigger">
+                        <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="icon ni ni-arrow-left"></em></a>
+                        <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                    </div>
+                    <div class="nk-sidebar-brand">
+                        <a href="html/index.html" class="logo-link nk-sidebar-logo">
+                            <img class="logo-light logo-img" src="{{ inst.logoPath }}" srcset="{{ inst.logoPath }}" alt="{{ inst.name }}">
+                            <img class="logo-dark logo-img" src="{{ inst.logoPath }}" srcset="{{ inst.logoPath }}" alt="{{ inst.name }}">
+                        </a>
+                    </div>
+                </div><!-- .nk-sidebar-element -->
+                <div class="nk-sidebar-element nk-sidebar-body">
+                    <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-menu" data-simplebar>
+                            <ul class="nk-menu">
+                                <li class="nk-menu-heading">
+                                    <h6 class="overline-title text-primary-alt">Misc Pages</h6>
+                                </li><!-- .nk-menu-heading -->
+                                {% for key, item in sidebarMenu.items   %}
+                                  {% if item.hasChildren and item.id ==  menu_id %}
+                                  {% for subKey, subItem in item.items %}
+                                <li class="nk-menu-item">
+                                    <a href="{{ helpers.url(inst,subItem.path) }}" class="nk-menu-link ">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-signin"></em></span>
+                                        <span class="nk-menu-text">{{ subItem.name }}</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                            </ul><!-- .nk-menu -->
+                        </div><!-- .nk-sidebar-menu -->
+                    </div><!-- .nk-sidebar-content -->
+                </div><!-- .nk-sidebar-element -->
+            </div>
+            <!-- sidebar @e -->
+
+{% endmacro %}

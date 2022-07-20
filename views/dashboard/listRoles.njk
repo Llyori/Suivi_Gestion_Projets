@@ -1,0 +1,74 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Liste des Roles.</h3>
+            <div class="nk-block-des text-soft">
+                <p>Vous avez {{ Role| length}} Roles..</p>
+            </div>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <div class="nk-block-head-content">
+                <div class="toggle-wrap nk-block-tools-toggle">
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                        <ul class="nk-block-tools g-3">
+                            <!-- <li><a href="#" class="btn btn-white btn-outline-light"><em class="icon ni ni-download-cloud"></em><span>Export</span></a></li> -->
+                            <li class="nk-block-tools-opt">
+                                <div class="drodown">
+                                    <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#" data-toggle="modal" data-target="#addTax"><span>Nouveu Role</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- .toggle-wrap -->
+            </div><!-- .nk-block-head-content -->
+        </div>
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+
+{% endblock %}
+
+
+{% block content %}
+
+            <div class="nk-content-body">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <table class="datatable-init-export nowrap table" data-export-title="Export">
+                                    <thead>
+                                        <tr>
+                                            <th>Role</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dev in Role%}
+                                        <tr>
+                                            <td>{{ dev.nomRole}}</td>
+                                            
+                                            <!-- <td><a href="/soft/removeRole/{{dev.nomRole}}" class="btn btn-light">Supprimer</a></td> -->
+                                            <td class="tb-col-action w-50">
+                                                <a href="/soft/update/{{dev.idRole}}/{{user.uuid}}" class="btn btn-dim btn-primary"><span>Modifier</span></a>
+                                                <a href="/soft/removeRole/{{dev.nomRole}}/{{user.uuid}}" class="link-cross mr-sm-n1 w-30"><em class="icon ni ni-cross"></em></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- .card-preview -->
+                    </div> <!-- nk-block -->
+                    
+                    
+
+{% include "partials/createRole.njk" %}
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head nk-block-head-sm">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <h3 class="nk-block-title page-title">Equipe de Developpement</h3>
+                </div><!-- .nk-block-head-content -->
+            </div>
+        </div>
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+
+{% endblock %}
+
+
+
+{% block content %}
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                
+            </div>
+            <div class="invoice-wrap">
+                <div class="invoice-brand text-center">
+                    <h3 class="nk-block-title page-title">Veillez choisir<strong class="text-primary big"> l'Equipe</strong> qui travaillera sur le projet.</h3><br>
+                </div>
+                <form id="form4" method="post" data-page="/dash/pro/{{user.uuid}}" action="/dash/teamProject" class="form-validate">
+                    <div class="row g-gs">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="fv-topics">Equipe</label>
+                                <div class="form-control-wrap ">
+                                    <select class="form-control form-select" id="fv-topics" name="idEquipe" data-placeholder="Selectionner Equipe">
+                                        {% for team in teams %}
+                                        <option label="empty" value=""></option>
+                                        <option value="{{team.idEquipe}}">{{team.nomEquipe}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" value="{{projet.idProjet}}" hidden id="fv-full-name" name="idProjet" required>
+                                <input type="text" class="form-control" value="{{user.uuid}}" hidden id="fv-full-name" name="uuid">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                <li>
+                                            <button type="submit" id="form4_button" class="btn btn-primary">
+                                                    <span style="display: none" id="form4_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                    <span id="form4_submit" >Soumettre</span>
+                                                </button> 
+                                     </li>
+                            </ul>
+                                    
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{# new agency modal end #}
+
+    {% endblock %}

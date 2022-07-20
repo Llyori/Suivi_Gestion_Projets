@@ -1,0 +1,1 @@
+{% macro url(inst,path='',csrf='') %}/web/{{ inst.code}}{{ path }}{{ '?_csrf='+csrf if csrf !='' }}{% endmacro %}

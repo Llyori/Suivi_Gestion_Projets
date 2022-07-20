@@ -1,0 +1,68 @@
+{% extends "layouts/dashboard.njk" %}
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Tâches du Projet: {{ projet.nomProjet }}</h3>
+            <div class="nk-block-des text-soft">
+                <p>Veuillez Cliquer sur l'action attaché sur la tâche de votre choix.</p>
+            </div>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <!-- <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a> -->
+        </div>
+    </div><!-- .nk-block-between -->
+    
+</div><!-- .nk-block-head -->
+{% endblock %}
+
+{% block content %}
+    <div class="card card-bordered card-stretch">
+                        <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                                <table class="table table-orders">
+                                    <thead class="tb-odr-head">
+                                        <tr class="tb-odr-item">
+                                            <th class="tb-odr-info">
+                                                <span class="tb-odr-date d-none d-md-inline-block">Nom Tâche</span>
+                                            </th>
+                                            <th class="tb-odr-info">
+                                                <span class="tb-odr-date d-none d-md-inline-block">Description</span>
+                                            </th>
+                                            <th class="tb-odr-amount">
+                                                <span class="tb-odr-total">Date Debut-Date Fin</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-odr-body">
+                                        {% for task in Tasks %}
+                                        <tr class="tb-odr-item">
+                                            <td class="tb-odr-info">
+                                                <span class="tb-odr-id"><a href="html/invoice-details.html">{{task.nomTache}}</a></span>
+                                            </td>
+                                            <td class="tb-odr-amount">
+                                                <span class="tb-odr-total">
+                                                    <span class="amount">{{task.libelle}}</span>
+                                                </span>
+                                            </td>
+                                            <td class="tb-odr-amount">
+                                                <span class="tb-odr-amount">
+                                                    <span class="tb-odr-status d-none d-md-inline-block">{{task.dateDebut}} - {{task.dateFin}}</span>
+                                                </span>
+                                            </td>
+                                            <td class="tb-col-action">
+                                                <div class="team-view">
+                                                    <a href="/dash/listTask/{{task.idTache}}/{{projet.idProjet}}/{{user.uuid}}" class="btn btn-block btn-dim btn-primary  {{ 'disabled' if task.statut in 'En cours' }}"><span>Choisir</span></a>
+                                                </div>
+                                            </td>
+                                        </tr><!-- .tb-odr-item -->
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div><!-- .card-inner -->
+                        </div>
+                    </div>
+
+
+{% endblock %}

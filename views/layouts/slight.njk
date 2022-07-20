@@ -1,0 +1,70 @@
+
+            <div class="nk-sidebar nk-sidebar-fixed is-dark " data-content="sidebarMenu">
+                <div class="nk-sidebar-element nk-sidebar-head">
+                    <div class="nk-menu-trigger">
+                        
+                        <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                        <img  src="./images/logo-dark.png" srcset="./images/logo2x.png 2x" height="60px" width="80px" alt="logo">
+                    </div>
+                </div><!-- .nk-sidebar-element -->
+                <div class="nk-sidebar-element nk-sidebar-body">
+                    <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-menu" data-simplebar>
+                            <ul class="nk-menu">
+                               <li class="nk-menu-item">
+                                    <a href="/web/dash/page/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                        <span class="nk-menu-text">OnTime</span><span class="nk-menu-badge">{{user.role.nomRole}}</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-heading">
+                                    <h6 class="overline-title text-primary-alt">Gestion Personnel</h6>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="/soft/Role/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-grid-alt"></em></span>
+                                        <span class="nk-menu-text">Role</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="/developer/team/listdeveloper/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                        <span class="nk-menu-text">Personnel</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                <li class="nk-menu-item">
+                                    <a href="/team/list/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
+                                        <span class="nk-menu-text">Equipe</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+                                
+                                <li class="nk-menu-heading">
+                                    <h6 class="overline-title text-primary-alt">Management Projets</h6>
+                                </li><!-- .nk-menu-heading -->
+                                <li class="nk-menu-item">
+                                    <a href="/dash/pro/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-text">Projet</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+                                
+                                <li class="nk-menu-item">
+                                    <a href="/dash/pProjet/{{user.uuid}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
+                                        <span class="nk-menu-text">Etat d'Avancement</span>
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+
+                                
+                            </ul><!-- .nk-menu --> 
+                        </div><!-- .nk-sidebar-menu -->
+                    </div><!-- .nk-sidebar-content -->
+                </div><!-- .nk-sidebar-element -->
+            </div>
+
+

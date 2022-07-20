@@ -1,0 +1,233 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block content %}
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Projets</h3>
+                            <div class="nk-block-des text-soft">
+                                {% if (projects| length > 1) %}
+                                <p>Vous avez {{ projects| length}} Projets.</p>
+                                {% else %}
+                                <p>Vous avez {{ projects| length}} Projet.</p>
+                                {% endif %}
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                       <li class="nk-block-tools-opt"><a href="#" data-toggle="modal" data-target="#addTax" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Nouveau Projet</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-primary alert-icon" role="alert">
+                <em class="icon ni ni-alert-circle"></em> 
+                <strong>Projet En Attente</strong>. 
+            </div>
+            <div class="nk-block">
+                <div class="row g-gs">
+                    {% for project in projects %}
+                        {% if project.statut in 'En Attente' %}
+                    <div class="col-sm-6 col-lg-4 col-xxl-3">
+                        <div class="card card-bordered h-100">
+                            <div class="card-inner">
+                                <div class="project">
+                                    <div class="project-head">
+                                            <div class="project-info">
+                                                <h6 class="title">{{project.nomProjet}}</h6>
+                                                <span class="sub-text">{{project.nomClient}}</span>
+                                            </div>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li><a href="/dash/removeProject/{{project.idProjet}}/{{user.uuid}}"><em class="icon ni ni-edit"></em><span>Supprimer Projet</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="project-details">
+                                        <p>{{project.libelle}}.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if project.statut in 'En Attente' %}
+                        <div class="team-view">
+                            <a href="/dash/soumettre/{{project.idProjet}}/{{user.uuid}}"  class="btn btn-dim btn-danger"><span>Soumettre</span></a>
+                            <!-- <a href="/soft/RemovePersonel/{{team.uuid}}"  class="btn btn-dim btn-danger"><span>Soumettre</span></a> -->
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+             </div>       
+        </div><br><br><br>
+        <div class="alert alert alert-secondary" role="alert">
+            <em class="icon ni ni-alert-circle"></em> 
+            <strong>Projet Soumis</strong>. 
+        </div>
+        <div class="nk-block">
+            <div class="row g-gs">
+                {% for project in projects %}
+                    {% if project.statut in 'soumis' %}
+                    {% for eq in EquipeProjet %}
+                    {% if project.idProjet == eq.idProjet.idProjet %}
+                    {% for num in chef %}
+                    {% if eq.idEquipe.idEquipe == num.idEquipe.idEquipe %}
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="project">
+                                <div class="project-head">
+                                    <a href="#" class="project-title">
+                                        <div class="project-info">
+                                            <h6 class="title">{{project.nomProjet}}</h6>
+                                            <span class="sub-text">{{project.nomClient}}</span>
+                                        </div>
+                                    </a>
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="#"><em class="icon ni ni-check-round-cut"></em><span>Marquer comme Terminé</span></a></li>
+                                                <li><a href="/dash/removeProject/{{project.idProjet}}"><em class="icon ni ni-edit"></em><span>Supprimer Projet</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details">
+                                    <p>{{project.libelle}}.</p>
+                                </div>
+                                <ul class="team-statistics">
+                                    <li><span>{{eq.idEquipe.nomEquipe}}</span><span>Team</span></li>
+                                    <li><span>{{num.idDeveloppeur.name}}</span><span>Chef Equipe</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+         </div>       
+    </div><br><br><br>
+    <div class="alert alert-info alert-icon" role="alert">
+        <em class="icon ni ni-alert-circle"></em> 
+        <strong>Projet En Cours</strong>. 
+    </div>
+    <div class="nk-block">
+        <div class="row g-gs">
+            {% for project in projects %}
+                {% if project.statut in 'En cours' %}
+                {% for eq in EquipeProjet %}
+                {% if project.idProjet == eq.idProjet.idProjet %}
+                {% for num in chef %}
+                {% if eq.idEquipe.idEquipe == num.idEquipe.idEquipe %}
+            <div class="col-sm-6 col-lg-4 col-xxl-3">
+                <div class="card card-bordered h-100">
+                    <div class="card-inner">
+                        <div class="project">
+                            <div class="project-head">
+                                <a href="/dash/listTask/{{project.idProjet}}/{{user.uuid}}" class="project-title">
+                                    <div class="project-info">
+                                        <h6 class="title">{{project.nomProjet}}</h6>
+                                        <span class="sub-text">{{project.nomClient}}</span>
+                                    </div>
+                                </a>
+                                <div class="drodown">
+                                    <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#"><em class="icon ni ni-check-round-cut"></em><span>Marquer comme Terminé</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-details">
+                                <p>{{project.libelle}}.</p>
+                            </div>
+                            <ul class="team-statistics">
+                                <li><span>{{eq.idEquipe.nomEquipe}}</span><span>Team</span></li>
+                                <li><span>{{num.idDeveloppeur.name}}</span><span>Chef Equipe</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+     </div>
+        </div><br><br><br>
+        <div class="alert alert-fill alert-success alert-icon" role="alert">
+            <em class="icon ni ni-check-circle"></em> 
+            <strong>Projets Terminés</strong>. 
+        </div>
+        <div class="nk-block">
+            <div class="row g-gs">
+                {% for project in projects %}
+                    {% if project.statut in 'termine' %}
+                    {% for eq in EquipeProjet %}
+                    {% if project.idProjet == eq.idProjet.idProjet %}
+                    {% for num in chef %}
+                    {% if eq.idEquipe.idEquipe == num.idEquipe.idEquipe %}
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="project">
+                                <div class="project-head">
+                                    <a href="/dash/listTask/{{project.idProjet}}" class="project-title">
+                                        <div class="project-info">
+                                            <h6 class="title">{{project.nomProjet}}</h6>
+                                            <span class="sub-text">{{project.nomClient}}</span>
+                                        </div>
+                                    </a>
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="#"><em class="icon ni ni-check-round-cut"></em><span>Marquer comme Terminé</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details">
+                                    <p>{{project.libelle}}.</p>
+                                </div>
+                                <ul class="team-statistics">
+                                    <li><span>{{eq.idEquipe.nomEquipe}}</span><span>Team</span></li>
+                                    <li><span>{{num.idDeveloppeur.name}}</span><span>Chef Equipe</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+         </div>
+            </div>
+    </div>
+</div>
+{% include "partials/createprojet.njk" %}
+ {% endblock %}

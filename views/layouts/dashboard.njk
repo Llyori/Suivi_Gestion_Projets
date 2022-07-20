@@ -1,0 +1,34 @@
+{% extends "layouts/base.njk" %}
+{% import "dashboard/macro/helpers.njk" as helpers %}
+{% import "dashboard/macro/form.njk" as form %}
+{% import "dashboard/macro/svgIcons.njk" as icon %}
+
+
+{% block body %}
+{% include "./slightdev.njk" %}
+    <div class="nk-wrap ">
+        {% include "./headerdev.njk" %}
+        <div class="nk-content ">
+                   <div class="container-fluid">
+                <div class="nk-content-inner">
+                     <div class="nk-content-body">
+                    {% block page_action %} {% endblock %}
+                    {% block content %}{% endblock %}
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <form action="/web/auth/logout" method="POST" id="logoutForm">
+        {{ form.csrf_field(csrf) }}
+    </form>
+   
+    
+    <!-- {% if inst %}
+       {{ form.text_field(_e ,_o ,name="codeInst", hidden = true, value = inst.code ) }}
+     {% endif %}   -->
+
+{% endblock %}
+

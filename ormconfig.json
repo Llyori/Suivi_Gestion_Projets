@@ -1,0 +1,25 @@
+{
+  "type": "mssql",
+  "database": "controlProjet",
+  "username": "sa",
+  "password": "Bolan",
+  "host": "localhost",
+  "port": 1433,
+  "ssl": false,
+  "seeds": [
+    "seeds/**/*{.ts,.js}"
+  ],
+  "entities": [
+    "src/**/*.entity{.ts,.js}"
+  ],
+  "migrations": [
+    "migration/*.js"
+  ],
+  "cli": {
+    "migrationsDir": "migration"
+  },
+  "extra": {
+    "encrypt": true,
+    "trustServerCertificate": true
+  }
+}

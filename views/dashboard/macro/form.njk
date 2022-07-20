@@ -1,0 +1,59 @@
+{# cesrf field macro #}
+{% macro csrf_field(csrf) %}
+    <input type="hidden" name="_csrf" value="{{ csrf }}" />
+{% endmacro %}
+
+
+{# text field macro #}
+{% macro text_field(errors, old, label, name, value, placeholder, classes, required = true, readonly= false, type = 'text', hint, hidden = false) %}
+{% if label %}
+    <label class="form-label">{{ label }}</label>  
+{% endif %} 
+    <div class="form-control-wrap">
+        {% if hint %}  
+        <div class="form-text-hint">
+            <span class="overline-title">{{ hint }}</span>
+        </div>
+        {% endif %}
+        <input type="{{ type }}" value ="{{value}}" class="form-control  {{ classes }}"  {{ "readonly = readonly" if readonly }} {{ "hidden" if hidden }}  {{ "is_required" if required }}   id="{{ name }}" name="{{ name }}" 
+        placeholder="{{ placeholder if placeholder else label }}">
+        {{ ajax_feedback(name)    }}
+    </div>
+{% endmacro %}
+
+
+{# feedback macro  #}
+{% macro feedback(errors, name) %}
+    {% if name in errors %}
+        {% for error in errors[name] %}
+            <span id ="-error" class="invalid">
+            {{  error.type + ":" if error.type != "" }}
+            {{ error.message }}
+            </span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro ajax_feedback(name) %}
+            <span id ="{{name}}-error" style="display: inline !important;" class="invalid">
+            </span>
+{% endmacro %}
+
+
+{# select field macro  #}
+{% macro select_field(errors, old, label, name, value, placeholder, options, classes, required = true, search = "on") %}
+        <label class="form-label"> {{ label }} </label>
+        <div class="form-control-wrap">
+    <select {{ 'is_required' if required }} class="form-select {{ classes }} " name="{{ name }}" data-search="{{ search }}">
+        {% if placeholder %}
+            <option >{{ placeholder }}</option>
+        {% endif %}
+        {% for option in options %}
+            <option >
+                {{ option }}
+            </option>
+        {% endfor %}
+    </select>
+    {{ ajax_feedback(name)  }}
+    </div>
+{% endmacro %}

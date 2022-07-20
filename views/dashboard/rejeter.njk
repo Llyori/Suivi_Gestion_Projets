@@ -1,0 +1,107 @@
+{% if var==1 %}
+    {% extends "layouts/dashboad.njk" %}
+{% else %}
+    {% extends "layouts/dashboard.njk" %}
+{% endif %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <div class="nk-block-head-content">
+                
+            </div><!-- .nk-block-head-content -->
+        </div>
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="components-preview wide-md mx-auto">
+                    <div class="nk-block nk-block-lg">
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <h4 class="title nk-block-title">Veuillez entrer les notes de pour amélioration</h4>
+                            </div>
+                        </div>
+                        <div class="card card-bordered">
+                            <div class="card-inner">
+                                <form id="form4" method="post" data-page="/dash/task/{{task.idTache}}/{{user.uuid}}" action="/dash/rejeterEtat" class="form-validate">
+                                    <div class="row g-gs">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-subject">Fait le</label>
+                                                <div class="form-control-wrap"> 
+                                                    <input type="test" class="form-control" readonly value="{{task.date}}" id="fv-subject" name="date">
+                                                    <input type="text" class="form-control" value="{{task.idTache}}" hidden readonly id="fv-subject" name="idTache">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-message">Travail Fait</label>
+                                                <div class="form-control-wrap">
+                                                    <input class="form-control form-control-sm" readonly value="{{task.travailFait}}" id="fv-message" name="travailFait">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-message">Difficultés rencontrées</label>
+                                                <div class="form-control-wrap">
+                                                    <input class="form-control form-control-sm" id="fv-message" name="difficulte" readonly value="{{task.difficulte}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-message">Besoins</label>
+                                                <div class="form-control-wrap">
+                                                    <input class="form-control form-control-sm" id="fv-message" name="difficulte" readonly value="{{task.besoin}}">
+                                                    <input class="form-control form-control-sm" id="fv-message" name="uuid" hidden value="{{user.uuid}}">
+                                                    <input class="form-control form-control-sm" id="fv-message" name="idTacheDetail" hidden value="{{task.idTacheDetail}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-message">Commentaire !</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control form-control-sm" id="fv-message" name="commentaire" placeholder="Votre commentaire"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                <li>
+                                                            <button type="submit" id="form4_button" class="btn btn-primary">
+                                                                    <span style="display: none" id="form4_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                    <span id="form4_submit" >Enregistrer</span>
+                                                                </button> 
+                                                     </li>
+                                            </ul>
+                                                    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .nk-block -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

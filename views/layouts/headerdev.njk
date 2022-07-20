@@ -1,0 +1,60 @@
+    <!-- main header @s -->
+    <div class="nk-header nk-header-fixed is-white">
+        <div class="container-fluid">
+            <div class="nk-header-wrap">
+                <div class="nk-menu-trigger mr-sm-2 d-lg-none">
+                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="headerNav"><em class="icon ni ni-menu"></em></a>
+                </div>
+                <div class="nk-header-tools">
+                        <ul class="nk-quick-nav">      
+                            <li class="dropdown user-dropdown order-sm-first">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <div class="user-toggle">
+                                        <div class="user-avatar sm">
+                                            <em class="icon ni ni-user-alt"></em>
+                                        </div>
+                                        <div class="user-info d-none d-xl-block">
+                                            <div class="user-username">{{ user.role.nomRole }}</div>
+                                            <div class="user-name dropdown-indicator">{{ user.name }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1 is-light">
+                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                        <div class="user-card">
+                                            <div class="user-avatar">
+                                                <span>AB</span>
+                                            </div>
+                                            <div class="user-info">
+                                                <span class="lead-text">{{ user.name }}</span>
+                                                <span class="sub-text">{{ user.telephone }}</span>
+                                            </div>
+                                            <div class="user-action">
+                                                <a class="btn btn-icon mr-n2" href="html/user-profile-setting.html"><em class="icon ni ni-setting"></em></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                        <ul class="link-list">
+                                            <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                            <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                        <ul class="link-list">
+                                            <li><a href="/web/auth/logout"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li><!-- .dropdown -->
+                            
+                            <li class="d-lg-none">
+                                <div class="nk-menu-trigger d-xl-none ml-n1">
+                                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                                </div>                           
+                            </li>
+                        </ul><!-- .nk-quick-nav -->
+                    </div><!-- .nk-header-tools -->
+        </div><!-- .container-fliud -->
+    </div>
+    </div>

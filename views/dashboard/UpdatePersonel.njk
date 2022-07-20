@@ -1,0 +1,68 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Mise A jour d'un Personnel</h3>
+                                            <div class="nk-block-des text-soft">
+                                                <p>Veuillez Cliquer sur l'action à accomplir.</p>
+                                            </div>
+                                        </div><!-- .nk-block-head-content -->
+                                       
+                                         <div class="nk-block-head-content">
+                                            <a href="/developer/team/listdeveloper" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                            <a href="/developer/team/listdeveloper" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                                        </div>
+                                    </div>
+                                    
+                                    
+ </div>
+ {% endblock %}
+
+ {% block content %}
+ <div class="nk-content">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        {% for team in teams %}
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="team">
+                                        <div class="team-status bg-success text-white">Ad</div>
+                                        <div class="user-card user-card-s2">
+                                            <div class="user-avatar md bg-primary">
+                                                <span>Dev</span>
+                                                <div class="status dot dot-lg dot-success"></div>
+                                            </div>
+                                            <div class="user-info">
+                                                <h6>{{ team.name }}</h6>
+                                                <span class="sub-text">{{ team.telephone }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="team-details">
+                                            <p>Je suis un {{team.role}}.</p>
+                                        </div>
+                                        <ul class="team-statistics">
+                                            <li><span>213</span><span>Projects</span></li>
+                                        </ul>
+                                    <div class="team-view">
+                                            <a href=""  class="btn btn-dim btn-primary"><span>Modifier</span></a>
+                                            <a href="/soft/RemovePersonel/{{team.uuid}}"  class="btn btn-dim btn-danger"><span>Supprimer</span></a>
+                                        </div>
+                                    </div><!-- .team -->
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                        
+  {% endblock %}

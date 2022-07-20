@@ -1,0 +1,57 @@
+{% extends "layouts/dashboard.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Liste des membres.</h3>
+            <div class="nk-block-des text-soft">
+                <p>Cette equipe contient {{ teams| length}} membres..</p>
+            </div>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <div class="nk-block-head-content">
+                
+            </div><!-- .nk-block-head-content -->
+        </div>
+        <div class="nk-block-head-content">
+            <!-- <h3 class="nk-block-title page-title">Mes Equipes <strong class="nk-block-des text-soft">Consulter</strong></h3> -->
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+
+{% endblock %}
+
+
+{% block content %}
+
+            <div class="nk-content-body">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                                <table class="datatable-init-export nowrap table" data-export-title="Export">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom Developpeur</th>
+                                            <th>Numero Telephone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dev in teams %}
+                                        <tr>
+                                            <td>{{ dev.name}}</td>
+                                            <td>{{dev.telephone}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- .card-preview -->
+                    </div> <!-- nk-block -->
+                    
+                    
+
+{% include "partials/createPersonel.njk" %}
+
+{% endblock %}

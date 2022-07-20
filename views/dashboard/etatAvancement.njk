@@ -1,0 +1,49 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block content %}
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Etat d'Avancement des Projets</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Sélectionner le Projet désiré.</p>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div>
+                </div>
+            <div class="nk-block">
+                <div class="row g-gs">
+                {% for project in projects %}
+                    {% if project.statut in 'En cours'%}
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="project">
+                                <div class="project-head">
+                                    <a href="/dash/ETaskA/{{project.idProjet}}/{{user.uuid}}" class="project-title">
+                                        <div class="project-info">
+                                            <h6 class="title">{{project.nomProjet}}</h6>
+                                            <span class="sub-text">{{project.nomClient}}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="project-details">
+                                    <p>{{project.libelle}}.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+         </div>       
+    </div>
+        </div>
+    </div>
+</div>
+{% include "partials/createprojet.njk" %}
+ {% endblock %}

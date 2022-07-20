@@ -1,0 +1,66 @@
+{% extends "layouts/dashboard.njk" %}
+
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Evolution de la tache {{ task.nomTache }}.</h3>
+                                            <!-- <div class="nk-block-des text-soft">
+                                                <p>Vous avez {{ projects| length}} projets..</p>
+                                            </div> -->
+                                        </div><!-- .nk-block-head-content -->
+                                        <div class="nk-block-head-content">
+                                            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                                        </div>
+                                    </div><!-- .nk-block-between -->
+                                    
+                                    
+ </div><!-- .nk-block-head -->
+{% endblock %}
+
+{% block content %}
+
+                    <div class="card card-preview">
+                        <div class="card-inner">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Libelle</th>
+                                        <th scope="col">Difficultés</th>
+                                        <th scope="col">Besoin</th>
+                                        <th scope="col">Commentaire</th>
+                                        <th scope="col">Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for etat in DetailTache %}
+                                    {% if etat.statut not in 'En Attente' %}
+                                    <tr>
+                                        <th scope="row">{{etat.date}}</th>
+                                        <td>{{etat.travailFait}}</td>
+                                        <td>{{etat.difficulte}}</td>
+                                        <td>{{etat.besoin}}</td>
+                                        {% if etat.statut in 'rejete' %}
+                                        <td class="badge-outline-danger">{{etat.commentaire}}</td>
+                                        {% else %}
+                                        <td></td>
+                                        {% endif %}
+                                        {% if etat.statut in 'En Cours' %}
+                                        <td><p class="badge bg-warning">{{etat.statut}}</p></td>
+                                        {% elseif etat.statut in 'termine' %}
+                                        <td><p class="badge bg-success">{{etat.statut}}</p></td>
+                                        {% elseif etat.statut in 'rejete' %}
+                                        <td><p class="badge badge-outline-danger">{{etat.statut}}</p></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+</div>
+
+{% endblock %}

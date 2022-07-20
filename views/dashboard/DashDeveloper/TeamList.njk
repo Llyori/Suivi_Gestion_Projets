@@ -1,0 +1,100 @@
+{% extends "layouts/dashboard.njk" %}
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Mes Equipes</h3>
+            <div class="nk-block-des text-soft">
+                <p>Vous avez la possibilité de consulter la liste de vos collègues d'équipe ou de consulter la liste de projet pour ladite Equipe.</p>
+            </div>
+        </div>
+        <div class="nk-block-head-content">
+            <div class="toggle-wrap nk-block-tools-toggle">
+                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                <div class="toggle-expand-content" data-content="pageMenu">
+                    <ul class="nk-block-tools g-3">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}
+{% block content %}
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block">
+                    <div class="row g-gs">
+    {% for equipe in Equipes %}
+    {% for deve in DevEquipes %}
+    {% if equipe.idEquipe == deve.idEquipe.idEquipe %}
+    {% if (user.id == deve.idDeveloppeur.id) and (deve.chefEquipe) and (deve.idEquipe.statut == true) %}
+<div class="col-sm-6 col-lg-4 col-xxl-3">
+    <div class="card card-bordered">
+        <div class="card-inner">
+            <div class="team">
+                <div class="user-avatar sq bg-success">
+                    <span>Chef</span>
+                </div>
+                <div class="user-card user-card-s2">
+                    <div class="user-avatar lg bg-primary">
+                        <span>Team</span>
+                        <div class="status dot dot-lg dot-success"></div>
+                    </div>
+                    <div class="user-info">
+                        <h6>{{ equipe.nomEquipe }}</h6>
+                    </div>
+                </div>
+                <div class="team-view">
+                    <a href="/team/listDevTeam/{{equipe.idEquipe}}/{{user.uuid}}"  class="btn btn-block btn-dim btn-secondary"><span>Consulter</span></a>
+                </div>
+                <div class="team-view">
+                    <a href="/team/listProject/{{equipe.idEquipe}}/{{user.uuid}}/true"  class="btn btn-block btn-dim btn-primary"><span>Projet</span></a>
+                </div>
+            </div><!-- .team -->
+        </div><!-- .card-inner -->
+    </div><!-- .card -->
+</div><!-- .col -->
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% for equipe in Equipes %}
+    {% for deve in DevEquipes %}
+    {% if equipe.idEquipe == deve.idEquipe.idEquipe %}
+    {% if (user.id == deve.idDeveloppeur.id) and (deve.chefEquipe == false) and (deve.idEquipe.statut == true) %}
+<div class="col-sm-6 col-lg-4 col-xxl-3">
+    <div class="card card-bordered">
+        <div class="card-inner">
+            <div class="team">
+                <div class="user-card user-card-s2">
+                    <div class="user-avatar lg bg-primary">
+                        <span>Team</span>
+                        <div class="status dot dot-lg dot-success"></div>
+                    </div>
+                    <div class="user-info">
+                        <h6>{{ equipe.nomEquipe }}</h6>
+                    </div>
+                </div>
+                <div class="team-view">
+                    <a href="/team/listDevTeam/{{equipe.idEquipe}}/{{user.uuid}}"  class="btn btn-block btn-dim btn-secondary"><span>Consulter</span></a>
+                </div>
+                <div class="team-view">
+                    <a href="/team/listProject/{{equipe.idEquipe}}/{{user.uuid}}/false"  class="btn btn-block btn-dim btn-primary"><span>Projet</span></a>
+                </div>
+            </div><!-- .team -->
+        </div><!-- .card-inner -->
+    </div><!-- .card -->
+</div><!-- .col -->
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+</div></div></div></div></div></div>    
+
+ {% endblock %}

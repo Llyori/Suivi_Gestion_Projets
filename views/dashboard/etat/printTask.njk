@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <!-- Page Title  -->
+    <title>OnTime_EtatAvancement {{projet.nomProjet}}</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="/assets/css/dashlite.css?ver=2.9.1">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=2.9.1">
+</head>
+
+<body class="bg-white" onload="printPromot()">
+    
+    <div class="nk-block">
+        <div class="invoice invoice-print">
+            <div class="invoice-wrap">
+                <div class="brand-logo pb-4 text-center">
+                    <img src="./images/logo.png" srcset="./images/logo.png" width="245px" height="" alt="logo">
+                </div>
+                <div class="invoice-brand text-center">
+                    <h3 class="nk-block-title page-title">Projet de <strong class="text-primary big">{{projet.nomProjet}}</strong></h3><br>
+                </div>
+                <div class="invoice-head">
+                    <div class="invoice-contact">
+                        <span class="overline-title">Livrer A</span>
+                        <div class="invoice-contact-info">
+                            <h4 class="title">Mr {{projet.nomClient}}</h4>
+                            <!-- <ul class="list-plain">
+                                <li><em class="icon ni ni-map-pin-fill"></em><span>House #65, 4328 Marion Street<br>Newbury, VT 05051</span></li>
+                                <li><em class="icon ni ni-call-fill"></em><span>+012 8764 556</span></li>
+                            </ul> -->
+                        </div>
+                        <span class="overline-title">Supervise par</span>
+                        <div class="invoice-contact-info">
+                            <h4 class="title">Mr {{projet.idAdmin}}</h4>
+                        </div>
+                    </div>
+                    <div class="invoice-desc">
+                        <h3 class="title">DateLine</h3>
+                        <ul class="list-plain">
+                            <li class="invoice-id"><span>Date Debut</span>:<span>66K5W3</span></li>
+                            <li class="invoice-date"><span>Date Fin</span>:<span>{{projet.dateFinProjet}}</span></li>
+                        </ul>
+                    </div>
+                </div><!-- .invoice-head -->
+                <div class="invoice-bills">
+                    <div class="table-responsive">
+                        <div class="card card-preview">
+                            <div class="card-inner">
+                        <table class="datatable-init nowrap table">
+                            <thead>
+                                <tr>
+                                    <th class="w-50">Nom Tache</th>
+                                    <th>Date Debut</th>
+                                    <th>Date Fin</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in Tasks %}
+                                <tr>
+                                    <td>{{task.nomTache}}: {{task.libelle}}</td>
+                                    <td>{{task.dateDebut}}</td>
+                                    <td>{{task.dateFin}}</td>
+                                    <td>
+                                        <div class="progress progress-pill progress-md bg-light">
+                                            <div class="progress-bar" data-progress="{{ projet.progession }}"></div>
+                                        </div>{{ projet.progession }}%
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <!-- <tfoot>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Subtotal</td>
+                                    <td>$435.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Processing fee</td>
+                                    <td>$10.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">TAX</td>
+                                    <td>$43.50</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Grand Total</td>
+                                    <td>$478.50</td>
+                                </tr>
+                            </tfoot> -->
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </div><!-- .invoice-bills -->
+            </div><!-- .invoice-wrap -->
+        </div><!-- .invoice -->
+    </div><!-- .nk-block -->
+    <script>
+        function printPromot() {
+            window.print();
+        }
+    </script>
+</body>
+
+</html>

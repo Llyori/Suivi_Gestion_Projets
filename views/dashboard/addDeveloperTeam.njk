@@ -1,0 +1,53 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Choichissez les différents Developpeur de l'equipe {{ nomEquipes }}.</h3>
+                                            <!-- <div class="nk-block-des text-soft">
+                                                <p>Vous avez {{ projects| length}} projets..</p>
+                                            </div> -->
+                                        </div><!-- .nk-block-head-content -->
+                                        <div class="nk-block-head-content">
+                                            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                        </div>
+                                    </div><!-- .nk-block-between -->
+                                    
+                                    
+ </div><!-- .nk-block-head --><br><br>
+{% endblock %}
+
+{% block content %}
+<a href="/developer/team/listdev/{{idEquipe}}/{{user.uuid}}" class="btn btn-dim btn-primary">Consulter les developpeurs de l'equipe</a><br><br><br>
+                    <div class="row g-gs">
+                        {% for team in teams %}
+                        {% if team.id not in developers %}
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="team">
+                                        <div class="user-card user-card-s2">
+                                            <div class="user-avatar md bg-primary">
+                                                <span>Dev</span>
+                                                <div class="status dot dot-lg dot-success"></div>
+                                            </div>
+                                            <div class="user-info">
+                                                <h6>{{ team.name }}</h6>
+                                                <span class="sub-text">{{ team.telephone }}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="team-statistics">
+                                            <li><span>213</span><span>Projects</span></li>
+                                        </ul>
+                                    <div class="team-view">
+                                            <a href="developer/team/add/{{idEquipe}}/{{team.id}}/{{user.uuid}}"  class="btn btn-round {{ 'disabled' if team.id in developers }} btn-outline-light w-150px"><span>Ajouter</span></a>
+                                        </div>
+                                    </div><!-- .team -->
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        {% endif %}
+                        {% endfor %}
+</div>
+ {% endblock %}

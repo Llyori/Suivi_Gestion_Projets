@@ -1,0 +1,171 @@
+{% extends "layouts/dashboard.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">{{ projet.nomProjet }}</h3>
+            <div class="nk-block-des text-soft">
+                <p>Veiller à remplir toutes les informations au cours des différentes étapes.</p>
+                <p>   .</p>
+            </div>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+    
+</div><!-- .nk-block-head -->
+{% endblock %}
+
+{% block content %}
+
+            <div class="nk-content-body">
+                
+                    <div class="nk-block nk-block-lg">
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <div class="nk-block-des">
+                                    <p>Après cette action vous pouvez directement<code class="code-class"> Soumettre</code> ce projet, donc <code class="code-tag">le confier les tâches aux différents personnels prévu</code>.</p>
+                                    <p>Ce projet expire le <code class="code-class"> {{ projet.dateFinProjet }}</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-bordered">
+                            <div class="card-inner">
+                                <form action="/plan/project" data-page="/dash/planification/project/{{projet.idProjet}}/{{user.uuid}}/{{idEquipe}}" method="post" class="form-validate" id="form4">
+                                    <div class="row g-gs">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="fw-first-name">Nom Projet</label>
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" class="form-control" id="fv-full-name" value="{{ projet.nomProjet }}" readonly>
+                                                        <input type="text" class="form-control" id="fv-full-name" value="{{ projet.idProjet }}"  hidden name="idProjet" readonly>
+                                                        <input type="text" class="form-control" id="fv-full-name" value="{{ user.uuid }}"  hidden name="uuid" readonly>
+                                                        <input type="text" class="form-control" id="fv-full-name" value="{{ idEquipe }}"  hidden name="idEquipe" readonly>
+                                                        <input type="text" class="form-control" id="fv-full-name" value="{{ projet.dateFinProjet }}"  hidden name="fin" readonly>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-full-name">Nom Tâche</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="fv-full-name" name="nomTache">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-email">Description</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="fv-email" name="libelle">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-subject">Date Debut</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="date" class="form-control" id="fv-subject" name="dateDebut">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-subject">Date Fin</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="date" class="form-control" id="fv-dh" name="dateFin">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="fv-subject">Personnel</label>
+                                                <div class="form-control-wrap">
+                                                    <select class="form-control form-select" name="id" id="fv-topics" data-placeholder="Selectionne le Personnel">
+                                                        {% for role in developers %}
+                                                        <option label="empty" value=""></option>
+                                                        <option value="{{role.id}}">{{role.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                <li>
+                                                            <button type="submit" id="form4_button" class="btn btn-primary">
+                                                                    <span style="display: none" id="form4_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                    <span id="form4_submit" >Enregistrer</span>
+                                                                </button> 
+                                                     </li>
+                                            </ul>
+                                                    
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .nk-block --><br>
+
+
+                    <div class="components-preview wide-md mx-auto"></div>
+
+                    <div class="card card-bordered card-stretch">
+                        <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                                <table class="table table-orders">
+                                    <thead class="tb-odr-head">
+                                        <tr class="tb-odr-item">
+                                            <th class="tb-odr-info">
+                                                <span class="tb-odr-date d-none d-md-inline-block">Nom Tâche</span>
+                                            </th>
+                                            <th class="tb-odr-info">
+                                                <span class="tb-odr-date d-none d-md-inline-block">Description</span>
+                                            </th>
+                                            <th>
+                                                <span class="tb-odr-date d-none d-md-inline-block">Personnel</span>
+                                            </th>
+                                            <th class="tb-odr-amount">
+                                                <span class="tb-odr-total">Date Debut-Date Fin</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tb-odr-body">
+                                        {% for task in tasks %}
+                                        <tr class="tb-odr-item">
+                                            <td class="tb-odr-info">
+                                                <span class="tb-odr-id"><a href="html/invoice-details.html">{{task.nomTache}}</a></span>
+                                            </td>
+                                            <td class="tb-odr-amount">
+                                                <span class="tb-odr-total">
+                                                    <span class="amount">{{task.libelle}}</span>
+                                                </span>
+                                            </td>
+                                            <td class="tb-odr-amount">
+                                                <span class="tb-odr-total">
+                                                    <span class="amount">{{task.id.name}}, {{task.id.telephone}}</span>
+                                                </span>
+                                            </td>
+                                            <td class="tb-odr-amount">
+                                                <span class="tb-odr-amount">
+                                                    <span class="tb-odr-status d-none d-md-inline-block">{{task.dateDebut}} - {{task.dateFin}}</span>
+                                                </span>
+                                            </td>
+                                            <td class="tb-col-action"><a href="/plan/removeTask/{{task.idTache}}/{{projet.idProjet}}/{{user.uuid}}/{{idEquipe}}" class="link-cross mr-sm-n1"><em class="icon ni ni-cross"></em></a></td>
+                                        </tr><!-- .tb-odr-item -->
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div><!-- .card-inner -->
+                        </div>
+                    </div>
+</div>
+</div><br>
+
+<center><a href="/plan/soumettreProjet/{{projet.idProjet}}/{{user.uuid}}/{{idEquipe}}" data-toggle="modal" class="btn btn-xl btn-primary" data-target="#addTax"><span>Soumettre</span></a></center>
+
+{% endblock %}

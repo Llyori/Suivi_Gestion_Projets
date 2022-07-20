@@ -1,0 +1,123 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Modification</h3>
+                                            <div class="nk-block-des text-soft">
+                                                <p>Veillez renseigner sur les champs à modifier.</p>
+                                            </div>
+                                        </div><!-- .nk-block-head-content -->
+                                       
+                                        <div class="nk-block-head-content">
+                                            <!-- <h3 class="nk-block-title page-title">Mes Equipes <strong class="nk-block-des text-soft">Consulter</strong></h3> -->
+                                            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                                        </div>
+                                    </div>
+                                    
+                                    
+ </div>
+ {% endblock %}
+
+{% block content %}
+<div class="nk-content ">
+                    <div class="container-fluid">
+                                            <div class="card-inner">
+                                                {% if val == 1 %}
+                                                <form  id="form4" method="post" action="/soft/Modifier" class="form-validate">
+                                                {% elseif val == 2 %}
+                                                <form  id="form3" method="post" action="/soft/modifierPersonnel" class="form-validate">
+                                                {% endif %}
+                                                {% if val == 1 %}
+                                                    <div class="row g-gs">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fv-full-name">Nom Role</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{user.uuid}}" name="uuid" hidden>
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{role.nomRole}}" name="nomRole">
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{role.idRole}}" name="idRole" hidden>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                                <li>
+                                                                            <button type="submit" id="form4_button" class="btn btn-primary">
+                                                                                    <span style="display: none" id="form4_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                                    <span id="form4_submit" >Enregistrer les Informations</span>
+                                                                                </button> 
+                                                                     </li>
+                                                            </ul>
+                                                                    
+                                                        </div>
+                                                    </div>
+                                                    {% elseif val == 2%}
+                                                    <div class="row g-gs">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fv-full-name">Nom Personnel</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{users.name}}" name="name">
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{users.uuid}}" name="uuid" hidden>
+                                                                    <input type="text" class="form-control" id="fv-full-name" value="{{user.uuid}}" name="uu" hidden>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fv-topics">Statut</label>
+                                                                <div class="form-control-wrap ">
+                                                                    <select class="form-control form-select" id="fv-topics" name="status" placeholder="{{users.status}}">
+                                                                        <option value="Active">Active</option>
+                                                                        <option value="Inactif">Inactif</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fv-topics">Role</label>
+                                                                <div class="form-control-wrap ">
+                                                                    <select class="form-control form-select" id="fv-topics" name="role" data-placeholder="{{users.role.nomRole}}">
+                                                                        {% for role in Role %}
+                                                                        <option label="empty" value=""></option>
+                                                                        <option value="{{role.idRole}}">{{role.nomRole}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="fv-phone">Numero Telephone</label>
+                                                                <div class="form-control-wrap">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="fv-phone">+237</span>
+                                                                        </div>
+                                                                        <input name="telephone" value="{{users.telephone}}" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                                <li>
+                                                                            <button type="submit" id="form3_button" class="btn btn-primary">
+                                                                                    <span style="display: none" id="form3_loader" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                                    <span id="form3_submit" >Modifier</span>
+                                                                            </button> 
+                                                                     </li>
+                                                            </ul>
+                                                                    
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </form>
+                                    </div><!-- .nk-block -->
+                    </div>
+                
+ {% endblock %}

@@ -1,0 +1,70 @@
+{% extends "layouts/dashboard.njk" %}
+
+{% block content %}
+    <div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Projets</h3>
+                            <div class="nk-block-des text-soft">
+                                {% if (Projets| length > 1) %}
+                                <p>Vous avez {{ Projets| length}} Projets, Veillez cliquer sur le projet pour voir vos Tâches.</p>
+                                {% else %}
+                                <p>Vous avez {{ Projets| length}} Projet, Veillez cliquer sur le projet pour voir vos Tâches.</p>
+                                {% endif %}
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="row g-gs">
+                    {% for project in Projets %}
+                    <div class="col-sm-6 col-lg-4 col-xxl-3">
+                        <div class="card card-bordered h-100">
+                            <div class="card-inner">
+                                <div class="project">
+                                    <div class="project-head">
+                                        <a href="/dash/EtatlistTache/{{project.idProjet}}/{{user.uuid}}" class="project-title">
+                                            <div class="project-info">
+                                                <h6 class="title">{{project.nomProjet}}</h6>
+                                                <span class="sub-text">{{project.nomClient}}</span>
+                                            </div>
+                                        </a>
+                                        
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="#"><em class="icon ni ni-check-round-cut"></em><span>Marquer comme Terminé</span></a></li>
+                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Supprimer Projet</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="project-details">
+                                        <p>{{project.libelle}}.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="team-view">
+                            <a href="/dash/planification/project/{{project.idProjet}}"  class="btn btn-dim btn-danger {{ 'disabled' if project.statut in 'En cours' }} "><span>Planifier</span></a>
+                        </div> -->
+                    </div>
+                    {% endfor %}
+             </div>       
+        </div><br><br><br>
+         </div>       
+    </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

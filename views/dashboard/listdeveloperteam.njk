@@ -1,0 +1,95 @@
+{% extends "layouts/dashboad.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Liste...</h3>
+                                        </div><!-- .nk-block-head-content -->
+                                        <div class="nk-block-head-content">
+                                            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                            <!-- <a href="" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a> -->
+                                        </div>
+                                    </div><!-- .nk-block-between -->
+                                    
+ </div><!-- .nk-block-head -->
+{% endblock %}
+
+{% block content %}
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        {% for team in teams %}
+                            {% if team.id == chef.idDeveloppeur.id %}
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="team">
+                                        
+                                        <div class="user-avatar sq bg-success">
+                                            <span>Chef</span>
+                                        </div>
+                                        
+                                        <div class="user-card user-card-s2">
+                                            <div class="user-avatar md bg-primary">
+                                                <span>Dev</span>
+                                                <div class="status dot dot-lg dot-success"></div>
+                                            </div>
+                                            <div class="user-info">
+                                                <h6>{{ team.name }}</h6>
+                                                <span class="sub-text">{{ team.telephone }}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="team-statistics">
+                                            <li><span>213</span><span>Projects</span></li>
+                                        </ul>
+                                        <div class="team-view">
+                                            <a href="/developer/team/removedev/{{team.id}}/{{idEquipe}}/{{user.uuid}}"  class="btn btn-round btn-outline-light w-150px"><span>Supprimer</span></a>
+                                            <a href="/team/chef/add/{{idEquipe}}/{{team.id}}"  class="btn btn-round bg-white btn-outline-light w-150px {{ 'disabled' if team.id == chef.idDeveloppeur.id}} "><span>Chef Equipe</span></a>
+                                        </div>
+                                    </div><!-- .team -->
+                                    </div><!-- .team -->
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                            {% endif %}
+                        {% endfor %}
+                        {% for team in teams %}
+                            {% if team.id != chef.idDeveloppeur.id %}
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="team">
+                                        <div class="user-card user-card-s2">
+                                            <div class="user-avatar md bg-primary">
+                                                <span>Dev</span>
+                                                <div class="status dot dot-lg dot-success"></div>
+                                            </div>
+                                            <div class="user-info">
+                                                <h6>{{ team.name }}</h6>
+                                                <span class="sub-text">{{ team.telephone }}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="team-statistics">
+                                            <li><span>213</span><span>Projects</span></li>
+                                        </ul>
+                                        <div class="team-view">
+                                            <a href="/developer/team/removedev/{{team.id}}/{{idEquipe}}/{{user.uuid}}"  class="btn btn-round btn-outline-light w-150px"><span>Supprimer</span></a>
+                                            <a href="/team/chef/add/{{idEquipe}}/{{team.id}}/{{user.uuid}}"  class="btn btn-round btn-outline-light w-150px {{ 'disabled' if team.id == chef.idDeveloppeur.id}} "><span>Chef Equipe</span></a>
+                                        </div>
+                                    </div><!-- .team -->
+                                    </div><!-- .team -->
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                            {% endif %}
+                        {% endfor %}
+                        </div><!-- .col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

@@ -1,0 +1,103 @@
+{% extends "layouts/dashboard.njk" %}
+
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Tâches...</h3>
+            <div class="nk-block-des text-soft">
+                <p>{{projet.nomProjet}}, {{ Tasks| length}} Tâches.</p>
+            </div>
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <div class="nk-block-head-content">
+                
+            </div><!-- .nk-block-head-content -->
+        </div>
+        <div class="nk-block-head-content">
+            <a onclick="history.back()" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+            <a href="#" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <!-- <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Projets</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Vous avez {{ Projets| length}} Projets, Veillez cliquer sur le projet pour voir vos Tâches.</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="nk-block">
+                <div class="row g-gs">
+
+                    {% for task in Tasks %}
+                    {% if (task.id.id == user.id) and (task.statut not in 'En attente') %}
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <a href="#" class="project-title">
+                                                <div class="project-info">
+                                                    <h6 class="title">{{task.nomTache}}</h6>
+                                                    <span class="sub-text">{{task.id.name}}</span>
+                                                </div>
+                                            </a>
+                                            {% if (task.statut not in 'termine') %}
+                                            <div class="drodown">
+                                                <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="/dash/updateTache/{{task.idTache}}/termine/{{user.uuid}}"><em class="icon ni ni-check-round-cut"></em><span>Marquer comme Terminé</span></a></li>
+                                                        <li><a href="/dash/evolution/{{task.idTache}}/{{user.uuid}}"><em class="icon ni ni-check-round-cut"></em><span>Evolution tache</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="project-details">
+                                            <p>{{task.libelle}}.</p>
+                                        </div>
+                                    </div>
+                                    {% if (task.statut == 'termine') %}
+                                    <p class="badge alert-success">{{task.statut}}</p>
+                                    {% else %}
+                                    <div class="team-view">
+                                        <a href="dash/Etat/{{task.idTache}}/{{user.uuid}}"  class="btn btn-dim btn-danger {{'disabled' if task.statut in 'termine'}} "><span>Etat Avancement</span></a>
+                                        <!-- <a href="/soft/RemovePersonel/{{team.uuid}}"  class="btn btn-dim btn-danger"><span>Soumettre</span></a> -->
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
+                {% endfor %}
+                
+                </div>
+        </div><br><br><br>
+         </div>       
+    </div>
+        </div>
+    </div>
+</div>
+                    
+                    
+
+{% endblock %}

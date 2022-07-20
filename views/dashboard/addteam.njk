@@ -1,0 +1,107 @@
+{% extends "layouts/dashboad.njk" %}
+{% block page_action %}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Liste des Equipes</h3>
+            {% if (Equipes| length) > 1 %}
+            <div class="nk-block-des text-soft">
+                <p>Vous avez au total {{ Equipes| length }} Equipe.</p>
+            </div>
+            {% else %}
+            <div class="nk-block-des text-soft">
+                <p>Vous avez au total {{ Equipes| length }} Equipes.</p>
+            </div>
+            {% endif %}
+        </div><!-- .nk-block-head-content -->
+        <div class="nk-block-head-content">
+            <div class="toggle-wrap nk-block-tools-toggle">
+                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                <div class="toggle-expand-content" data-content="pageMenu">
+                    <ul class="nk-block-tools g-3">
+                        <!-- <li><a href="#" class="btn btn-white btn-outline-light"><em class="icon ni ni-download-cloud"></em><span>Export</span></a></li> -->
+                        <li class="nk-block-tools-opt">
+                            <div class="drodown">
+                                <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="link-list-opt no-bdr">
+                                        <li><a href="#" data-toggle="modal" data-target="#addTax"><span>Nouvelle Equipe</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- .toggle-wrap -->
+        </div><!-- .nk-block-head-content -->
+    </div><!-- .nk-block-between -->
+</div><!-- .nk-block-head -->
+ {% endblock %}
+{% block content %}
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block">
+                    <div class="row g-gs">
+
+    {% for equipe in Equipes%}
+    
+<div class="col-sm-6 col-lg-4 col-xxl-3">
+    <div class="card card-bordered h-100">
+        <div class="card-inner">
+            <div class="team">
+                <div class="team-head">
+                    
+                    <div class="user-card user-card-s2">
+                        <div class="user-avatar lg bg-primary">
+                            <span>Team</span>
+                            {% if equipe.statut == true %}
+                            <div class="status dot dot-lg dot-success"></div>
+                            {% else %}
+                            <div class="status dot dot-lg dot-danger"></div>
+                            {% endif %}
+                        </div>
+                        <div class="drodown">
+                            <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="link-list-opt no-bdr">
+                                    {% if equipe.statut == true %}
+                                    <li><a href="/developer/team/listdev/{{equipe.idEquipe}}/{{user.uuid}}"><em class="icon ni ni-check-round-cut"></em><span>Liste Membre</span></a></li>
+                                    <li><a href="/team/update/{{equipe.idEquipe}}/false/{{user.uuid}}"><em class="icon ni ni-edit"></em><span>Desactiver Equipe</span></a></li>
+                                    {% else %}
+                                    <li><a href="/team/update/{{equipe.idEquipe}}/true/{{user.uuid}}"><em class="icon ni ni-edit"></em><span>Activer Equipe</span></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <h6>{{ equipe.nomEquipe }}</h6>
+                        </div>
+                        {% for num in chef %}
+                        {% if (equipe.idEquipe == num.idEquipe.idEquipe) and (num.chefEquipe) %}
+                        <ul class="team-statistics">
+                            <li><span>{{num.idDeveloppeur.name}}</span><span>Chef Equipe</span></li>
+                        </ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                
+                <div class="team-view">
+                    <a href="/developer/team/list/{{ equipe.idEquipe }}/{{user.uuid}}" class="btn btn-block btn-dim btn-primary {{ 'disabled' if equipe.statut==false}}"><span>Ajouter Developpeur</span></a>
+                </div>
+            </div><!-- .team -->
+        </div><!-- .card-inner -->
+    </div><!-- .card -->
+</div><!-- .col -->
+
+{% endfor %}
+
+</div></div></div></div></div></div>
+
+{% include "partials/createTeam.njk" %}
+
+ {% endblock %}
