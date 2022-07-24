@@ -39,6 +39,8 @@ $ npm install
 $ npm run start
 
 # watch mode
+$ npm run shema:sync
+$ npm run seed:run
 $ npm run start:dev
 
 # production mode
